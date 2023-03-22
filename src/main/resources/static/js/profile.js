@@ -74,11 +74,10 @@ function getSubscribeModalItem(u) {
 			item += `<button class="cta" onclick="toggleSubscribe(${u.id}, this)">구독하기</button>`;
 		}
 	}
-	item += `
-	</div>
+	item += `\t</div>
 </div>`;
 
-	console.log(item);
+	console.log(u);
 	return item;
 }
 

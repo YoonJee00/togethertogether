@@ -1,5 +1,6 @@
 package com.together3.web.dto.subscribe;
 
+import com.together3.domain.subscribe.Subscribe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +17,12 @@ public class SubscribeDto {
     private String username;
     private String profileImageUrl;
     private BigInteger subscribeState;
-    private Integer equalUserState;
+    private BigInteger equalUserState;
+
+//    public SubscribeDto(Subscribe subscribe) {
+//        this.id = subscribe.getFromUser().getId();
+//        this.username = subscribe.getFromUser().getName();
+//        this.profileImageUrl = subscribe.getFromUser().getProfileImageUrl();
+//        this.subscribeState = false;
+//    }
 }

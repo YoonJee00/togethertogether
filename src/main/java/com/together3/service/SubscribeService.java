@@ -52,8 +52,8 @@ public class SubscribeService {
                 .setParameter(3, pageUserId);
 
         JpaResultMapper result = new JpaResultMapper();
-        List<SubscribeDto> subscribeDtos = result.list(query, SubscribeDto.class);
+        List<SubscribeDto> subscribeDto = result.list(query, SubscribeDto.class);
 
-        return subscribeDtos;
+        return subscribeDto;
     }
 }
