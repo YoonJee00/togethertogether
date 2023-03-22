@@ -20,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Service
 public class ImageService {
+
     private final ImageRepository imageRepository;
 
     @Value("${file.path}")
@@ -29,7 +30,7 @@ public class ImageService {
     public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
-        System.out.println("이미지 파일이름 : " + imageFileName);
+        System.out.println("이미지 파일이름: " + imageFileName);
 
         Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 
@@ -41,6 +42,7 @@ public class ImageService {
 
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
         imageRepository.save(image);
+
     }
 
     @Transactional(readOnly = true)

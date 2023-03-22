@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -28,27 +29,36 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 public class UserApiController {
+
     private final UserService userService;
     private final SubscribeService subscribeService;
 
+    @PutMapping("/api/user/{principalId}/profileImageUrl")
+    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile,
+                                                   @AuthenticationPrincipal PrincipalDetails principalDetails){
+        User userEntity = userService.회원프로필사진변경(principalId, profileImageFile);
+        principalDetails.setUser(userEntity); // 세션 변경
+        return new ResponseEntity<>(new CMRespDto<>(1, "프로필사진변경 성공", null), HttpStatus.OK);
+    }
+
     @PutMapping("/api/user/{id}")
-    public CMRespDto<?> update(@PathVariable int id, @Valid UserUpdateDto userUpdateDto, BindingResult bindingResult, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        if(bindingResult.hasErrors()) {
+    public CMRespDto<?> update(@PathVariable int id, @Valid UserUpdateDto userUpdateDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
 
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
-                //System.out.println("============================");
-                //System.out.println(error.getDefaultMessage());
-                //System.out.println("============================");
+                System.out.println("==========================");
+                System.out.println(error.getDefaultMessage());
+                System.out.println("==========================");
+
             }
+            throw new CustomValidationApiException("유효성 검사 실패함", errorMap);
+        } else {
+            User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
+            return new CMRespDto<>(1, "회원수정완료", userEntity);
 
-            throw new CustomValidationApiException("유효성검사 실패", errorMap);
         }
-
-        User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
-        principalDetails.setUser(userEntity);
-        return new CMRespDto<>(1, "회원 수정 완료", userEntity);
     }
 
     @GetMapping("/api/user/{pageUserId}/subscribe")

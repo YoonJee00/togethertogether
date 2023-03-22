@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +15,6 @@ public class SubscribeDto {
     private int id;
     private String username;
     private String profileImageUrl;
-    private Integer subscribeState;
+    private BigInteger subscribeState;
     private Integer equalUserState;
 }

@@ -11,11 +11,11 @@
  */
 
 // (1) 유저 프로파일 페이지 구독하기, 구독취소
-function toggleSubscribe(toUserId, obj) {
+function toggleSubscribe(to_user_id, obj) {
 	if ($(obj).text() === "구독취소") {
 		$.ajax({
 			type: "delete",
-			url: "/api/subscribe/" + toUserId,
+			url: "/api/subscribe/" + to_user_id,
 			dataType: "json"
 		}).done(res => {
 			$(obj).text("구독하기");
@@ -26,7 +26,7 @@ function toggleSubscribe(toUserId, obj) {
 	} else {
 		$.ajax({
 			type: "post",
-			url: "/api/subscribe/" + toUserId,
+			url: "/api/subscribe/" + to_user_id,
 			dataType: "json"
 		}).done(res => {
 			$(obj).text("구독취소");

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
     @Modifying
-    @Query(value = "INSERT INTO subscribe(from_user_id, to_user_id, create_date) VALUES(:from_user_id, :to_user_id, now())", nativeQuery = true)
+    @Query(value = "INSERT INTO subscribe(from_user_id, to_user_id, createDate) VALUES(:from_user_id, :to_user_id, now())", nativeQuery = true)
     void mSubscribe(@Param("from_user_id") int fromUserId, @Param("to_user_id") int toUserId);
 
     @Modifying

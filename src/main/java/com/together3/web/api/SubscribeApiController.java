@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class SubscribeApiController {
     private final SubscribeService subscribeService;
 
-    @PostMapping("/api/subscribe/{toUserId}")
-    public ResponseEntity<?> subscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
-        subscribeService.구독하기(principalDetails.getUser().getId(), toUserId);
+    @PostMapping("/api/subscribe/{to_user_id}")
+    public ResponseEntity<?> subscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int to_user_id) {
+        subscribeService.구독하기(principalDetails.getUser().getId(), to_user_id);
         return new ResponseEntity<>(new CMRespDto<>(1, "구독하기 성공", null), HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/subscribe/{toUserId}")
-    public ResponseEntity<?> unsubscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
-        subscribeService.구독취소하기(principalDetails.getUser().getId(), toUserId);
+    @DeleteMapping("/api/subscribe/{to_user_id}")
+    public ResponseEntity<?> unsubscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int to_user_id) {
+        subscribeService.구독취소하기(principalDetails.getUser().getId(), to_user_id);
         return new ResponseEntity<>(new CMRespDto<>(1, "구독취소 성공", null), HttpStatus.OK);
     }
 }

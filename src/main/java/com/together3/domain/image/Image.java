@@ -2,6 +2,7 @@ package com.together3.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.together3.domain.user.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class Image {
     private String postImageUrl;
 
     @JsonIgnoreProperties({"images"})
-    @JoinColumn(name = "userId")
+    @JoinColumn(name="user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 

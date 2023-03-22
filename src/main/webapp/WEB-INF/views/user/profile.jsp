@@ -12,7 +12,7 @@
 		<div class="profile-left">
 			<div class="profile-img-wrap story-border"
 				onclick="popup('.modal-image')">
-				
+
 				<form id="userProfileImageForm">
 					<input type="file" name="profileImageFile" style="display: none;"
 						id="userProfileImageInput" />
@@ -20,7 +20,7 @@
 
 				<img class="profile-image" src="/upload/${dto.user.profileImageUrl}"
 					onerror="this.src='/images/person.jpeg'" id="userProfileImage" />
-					
+
 			</div>
 		</div>
 		<!--유저이미지end-->
@@ -29,7 +29,7 @@
 		<div class="profile-right">
 			<div class="name-group">
 				<h2>${dto.user.name}</h2>
-				
+
 				<c:choose>
 					<c:when test="${dto.pageOwnerState}">
 						<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
@@ -43,12 +43,12 @@
 								<button class="cta" onclick="toggleSubscribe(${dto.user.id}, this)">구독하기</button>
 							</c:otherwise>
 						</c:choose>
-						
-						
+
+
 					</c:otherwise>
 				</c:choose>
-				
-				
+
+
 				<button class="modi" onclick="popup('.modal-info')">
 					<i class="fas fa-cog"></i>
 				</button>
@@ -82,11 +82,16 @@
 			<div class="tab-1-content-inner">
 
 				<!--아이템들-->
-
 				<c:forEach var="image" items="${dto.user.images}"> <!-- EL표현식에서 변수명을 적으면 get함수가 자동 호출된다. -->
 					<div class="img-box">
+						<a href=""> <img src="/upload/${image.postImageUrl}" />
+						</a>
+						<div class="comment">
+							<a href="#" class=""> <i class="fas fa-heart"></i><span></span>
+							</a>
+						</div>
+					</div>
 				</c:forEach>
-
 
 				<!--아이템들end-->
 			</div>
